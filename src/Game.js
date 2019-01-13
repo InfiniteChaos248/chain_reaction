@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { newPlayers, newBox, nextPlayerIndex } from './methods';
 
+//TODO : Add animations; get number of players, size of grid, player colors, etc from user; Add online multiplayer opption
+
 class Game extends Component {
 
     constructor(props) {
@@ -97,11 +99,11 @@ class Game extends Component {
             let { box } = this.state;
             let temp = [];
 
-            this.players.map(pl => {
+            this.players.forEach(pl => {
 
                 let present = false;
-                box.map(x => {
-                    x.map(y => {
+                box.forEach(x => {
+                    x.forEach(y => {
                         if (y.col === pl) {
                             present = true;
                         }
@@ -130,13 +132,13 @@ class Game extends Component {
             <div>
                 <div>{this.state.msg === "" ? this.players[this.state.player] + "'s turn" : ""}</div><br />
                 {
-                    this.state.box.map(x => {
+                    this.state.box.map((x, index) => {
                         return (
-                            <div className="board-row">
+                            <div key={index} className="board-row">
                                 {
-                                    x.map(y => {
+                                    x.map((y, index) => {
                                         return (
-                                            <button style={{ color: y.col }}
+                                            <button key={index} style={{ color: y.col }}
                                                 className="square"
                                                 disabled={this.state.msg !== ""}
                                                 onClick={() => {
